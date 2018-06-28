@@ -5,10 +5,10 @@ response=urllib.request.urlopen(url)
 html=(response.read()).decode('utf-8')
 html=html.split("\"")
 a=html[1]
+print(a)
 b=str("https://login.weixin.qq.com/qrcode/")
 c=b+a
 print(c)
 response=urllib.request.urlopen(c).read()
 with open("qrcode.jpg", "wb") as f:
 	f.write(response)
-	123
