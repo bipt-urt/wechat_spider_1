@@ -11,3 +11,4 @@ print(c)
 response=urllib.request.urlopen(c).read()
 with open("qrcode.jpg", "wb") as f:
 	f.write(response)
+	123
