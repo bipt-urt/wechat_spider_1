@@ -43,6 +43,7 @@ while testresponse2==408:
 
 
 list3='https://login.wx2.qq.com/cgi-bin/mmwebwx-bin/login?loginicon=true&uuid='+a+'&tip=0&r=-1241709442&_=1530250055109'
+print('==============================赶紧点登陆==============================')
 #print(list3)
 response3=str(urllib.request.urlopen(list3).read())
 if int(response3[14:17])==200:
@@ -94,15 +95,20 @@ list4='https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxgetcontact?skey='+Skey+'&r=-1
 postData={'BaseRequest':{"Uin":Uin,"Sid":Sid,"Skey":Skey,"DeviceID":"e899027140826785"}}
 response4= urllib.request.urlopen(list4, json.dumps(postData).encode('utf-8')).read()
 print('======================================================================')
-with open("data.txt","wb") as f:
+with open("data.txt","r") as f:
 	f.write(response4)
 with open("data.txt", "r", encoding="utf-8") as f:
 	content=f.read()
 	target=json.loads(content)
 	#print(target.keys())
 datalist=target['MemberList']
-for data in datalist:
-	
+with open("data.csv","w",newline="") as datacsv:
+	for data1 in datalist:
+		for data2 in data1:
+			data1[data2]=str(data1[data2])
+		print(data1['NickName'])
+		datacsv.write(data1['UserName']+" "+data1['NickName']+data1['RemarkName'])
+
+
+print(data['NickName']+','+data['PYQuanPin'])
 #获得用户好友信息
-
-
