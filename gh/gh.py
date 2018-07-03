@@ -3,6 +3,7 @@ import urllib.parse
 import urllib
 import http.cookiejar
 import json
+import csv
 
 
 def main():
@@ -54,37 +55,38 @@ if int(response3[14:17])==200:
 #print(testresponse3)
 
 response3=urllib.request.urlopen(testresponse3 + '&fun=new').read().decode("utf-8", "replace")
-ticket=response3.split(">")
-ticket=ticket[12]
-ticket=ticket.split("<")
+#print(response3)
+ticket=response3.split("</pass_ticket>")
 ticket=ticket[0]
+ticket=ticket.split("<pass_ticket>")
+ticket=ticket[1]
 print('=========================开始获取您的各种信息=========================')
 #print(ticket)
 #找到ticket
 
 
-Skey=response3.split(">")
-Skey=Skey[6]
-Skey=Skey.split("<")
+Skey=response3.split("</skey>")
 Skey=Skey[0]
+Skey=Skey.split("<skey>")
+Skey=Skey[1]
 print('======================================================================')
 #print(Skey)
 #找到Skey
 
 
-Uin=response3.split(">")
-Uin=Uin[10]
-Uin=Uin.split("<")
+Uin=response3.split("</wxuin>")
 Uin=Uin[0]
+Uin=Uin.split("<wxuin>")
+Uin=Uin[1]
 print('=========================您即将交出的所有信息=========================')
 #print(Uin)
 #找到Uin
 
 
-Sid=response3.split(">")
-Sid=Sid[8]
-Sid=Sid.split("<")
+Sid=response3.split("</wxsid>")
 Sid=Sid[0]
+Sid=Sid.split("<wxsid>")
+Sid=Sid[1]
 print('==========================………………………………………………==========================')
 #print(Sid)
 #找到Sid
@@ -95,7 +97,7 @@ list4='https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxgetcontact?skey='+Skey+'&r=-1
 postData={'BaseRequest':{"Uin":Uin,"Sid":Sid,"Skey":Skey,"DeviceID":"e899027140826785"}}
 response4= urllib.request.urlopen(list4, json.dumps(postData).encode('utf-8')).read()
 print('======================================================================')
-with open("data.txt","r") as f:
+with open("data.txt","wb") as f:
 	f.write(response4)
 with open("data.txt", "r", encoding="utf-8") as f:
 	content=f.read()
@@ -107,8 +109,5 @@ with open("data.csv","w",newline="") as datacsv:
 		for data2 in data1:
 			data1[data2]=str(data1[data2])
 		print(data1['NickName'])
-		datacsv.write(data1['UserName']+" "+data1['NickName']+data1['RemarkName'])
-
-
-print(data['NickName']+','+data['PYQuanPin'])
+		datacsv.write(data1['UserName']+" "+data1['NickName']+data1['RemarkName']+"\n")
 #获得用户好友信息
