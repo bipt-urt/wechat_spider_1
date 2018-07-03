@@ -102,8 +102,7 @@ with open("data.txt", "r", encoding="utf-8") as f:
 	#print(target.keys())
 datalist=target['MemberList']
 for data in datalist:
-	print(data['PYQuanPin'], data['NickName'])
-
+	
 #获得用户好友信息
 
 
