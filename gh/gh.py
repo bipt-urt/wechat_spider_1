@@ -7,12 +7,11 @@ import csv
 import io
 import sys
 import random
+from wxpy import *
 
 print('start')
-#改变标准输出的默认编码 
 
 
-print('ok')
 def main():
 	cj = http.cookiejar.CookieJar()
 	opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
@@ -130,7 +129,6 @@ print('=========================您已经交出的所有信息==================
 #获得用户好友信息
 
 
-Name=input('输入联系人：')
 message=input('输入消息：')
 result={}
 for element in datalist:
